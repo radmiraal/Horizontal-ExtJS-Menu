@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Tree</title>
+
+		<link rel="stylesheet" type="text/css" href="ext-3.2.1/resources/css/ext-all.css" />
+		<link rel="stylesheet" type="text/css" href="style.css" />
+
+		<script type="text/javascript" src="ext-3.2.1/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="ext-3.2.1/ext-all.js"></script>
+
+	<script>
+		function test() {
+			var el = Ext.fly('el');
+
+			// If you uncomment the line below, the error will appear.
+			//el.slideIn('l');
+
+			// this works, but you need to know the width of the element in advance (which might be possible, as only the icons are shown by default, and not the texts)
+			el.setStyle({
+				overflow: 'hidden',
+				width: 0,
+				display: 'block'
+			});
+			el.shift({
+				width: 40,
+				duration: 1
+			});
+		}
+	</script>
+	<style>
+	span {
+		float: left;
+	}
+	a {
+		float:left;
+	}
+	</style>
+	</head>
+	<body>
+		<span>Test</span><span style="display:none" id="el">bla</span>
+		<a href="#" onclick="test()">GO</a>
+		</body>
+</html>

@@ -1,0 +1,247 @@
+body {
+	font-family: verdana, arial;
+	font-size: 11px;
+	background-color: #6a6a6a;
+}
+
+a {
+	text-decoration: none;
+}
+
+.x-rootline-node-ct {
+	float: left;
+}
+
+
+
+
+/*body {
+	background-color: #dedede;
+}
+
+.x-rootline-node {
+	display: inline-block;
+	border: solid 1px green;
+}
+
+.f3-rootline-icon, .f3-rootline-ec-icon, .f3-rootline-elbow-line, .f3-rootline-elbow, .f3-rootline-elbow-end, .f3-rootline-elbow-plus, .f3-rootline-elbow-minus, .f3-rootline-elbow-end-plus, .f3-rootline-elbow-end-minus{
+	height: 18px;
+	margin: 0;
+	padding: 0;
+	vertical-align: top;
+	width: 16px;
+    background-repeat: no-repeat;
+	border: solid 1px red;
+}
+
+.f3-rootline-node-collapsed .f3-rootline-node-icon, .f3-rootline-node-expanded .f3-rootline-node-icon, .f3-rootline-node-leaf .f3-rootline-node-icon{
+	border: 0 none;
+	height: 18px;
+	margin: 0;
+	padding: 0;
+	vertical-align: top;
+	width: 16px;
+	background-position:center;
+    background-repeat: no-repeat;
+	border: solid 1px blue;
+}
+
+.ext-ie .f3-rootline-node-indent img, .ext-ie .f3-rootline-node-icon, .ext-ie .f3-rootline-ec-icon {
+    vertical-align: middle !important;
+}
+
+.ext-strict .ext-ie8 .f3-rootline-node-indent img, .ext-strict .ext-ie8 .f3-rootline-node-icon, .ext-strict .ext-ie8 .f3-rootline-ec-icon {
+    vertical-align: top !important;
+}
+
+.f3-rootline-noicon .f3-rootline-node-icon{
+	width:0; height:0;
+}
+
+ No line styles 
+.f3-rootline-no-lines .f3-rootline-elbow{
+	background:transparent;
+}
+
+.f3-rootline-no-lines .f3-rootline-elbow-end{
+	background:transparent;
+}
+
+.f3-rootline-no-lines .f3-rootline-elbow-line{
+	background:transparent;
+}
+
+ Arrows 
+.f3-rootline-arrows .f3-rootline-elbow{
+	background:transparent;
+}
+
+.f3-rootline-arrows .f3-rootline-elbow-plus{
+    background:transparent no-repeat 0 0;
+}
+
+.f3-rootline-arrows .f3-rootline-elbow-minus{
+    background:transparent no-repeat -16px 0;
+}
+
+.f3-rootline-arrows .f3-rootline-elbow-end{
+	background:transparent;
+}
+
+.f3-rootline-arrows .f3-rootline-elbow-end-plus{
+    background:transparent no-repeat 0 0;
+}
+
+.f3-rootline-arrows .f3-rootline-elbow-end-minus{
+    background:transparent no-repeat -16px 0;
+}
+
+.f3-rootline-arrows .f3-rootline-elbow-line{
+	background:transparent;
+}
+
+.f3-rootline-arrows .f3-rootline-ec-over .f3-rootline-elbow-plus{
+    background-position:-32px 0;
+}
+
+.f3-rootline-arrows .f3-rootline-ec-over .f3-rootline-elbow-minus{
+    background-position:-48px 0;
+}
+
+.f3-rootline-arrows .f3-rootline-ec-over .f3-rootline-elbow-end-plus{
+    background-position:-32px 0;
+}
+
+.f3-rootline-arrows .f3-rootline-ec-over .f3-rootline-elbow-end-minus{
+    background-position:-48px 0;
+}
+
+.f3-rootline-elbow-plus, .f3-rootline-elbow-minus, .f3-rootline-elbow-end-plus, .f3-rootline-elbow-end-minus{
+	cursor:pointer;
+}
+
+.ext-ie ul.f3-rootline-node-ct{
+    font-size:0;
+    line-height:0;
+    zoom:1;
+}
+
+.f3-rootline-node{
+	white-space: nowrap;
+}
+
+.f3-rootline-node-el {
+    line-height:18px;
+    cursor:pointer;
+}
+
+.f3-rootline-node a {
+	text-decoration:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+    -webkit-user-select:ignore;
+    -kthml-user-focus:normal;
+    -moz-user-focus:normal;
+    -moz-outline: 0 none;
+    outline:0 none;
+}
+
+.f3-rootline-node a span {
+	text-decoration:none;
+	padding:1px 3px 1px 2px;
+}
+
+.f3-rootline-node .f3-rootline-node-inline-icon{
+	background:transparent;
+}
+
+ Fix for ie rootVisible:false issue 
+.f3-rootline-root-ct {
+    zoom:1;
+}
+
+.f3-rootline-node-expanded .f3-rootline-node-icon{
+	background-image:url(../images/default/tree/folder-open.gif);
+}
+
+.f3-rootline-node-leaf .f3-rootline-node-icon{
+	background-image:url(../images/default/tree/leaf.gif);
+}
+
+.f3-rootline-node-collapsed .f3-rootline-node-icon{
+	background-image:url(../images/default/tree/folder.gif);
+}
+
+.f3-rootline-node-loading .f3-rootline-node-icon{
+	background-image:url(../images/default/tree/loading.gif) !important;
+}
+
+.f3-rootline-node .f3-rootline-node-inline-icon {
+    background-image: none;
+}
+
+.f3-rootline-lines .f3-rootline-elbow{
+	background-image:url(../images/default/tree/elbow.gif);
+}
+
+.f3-rootline-lines .f3-rootline-elbow-plus{
+	background-image:url(../images/default/tree/elbow-plus.gif);
+}
+
+.f3-rootline-lines .f3-rootline-elbow-minus{
+	background-image:url(../images/default/tree/elbow-minus.gif);
+}
+
+.f3-rootline-lines .f3-rootline-elbow-end{
+	background-image:url(../images/default/tree/elbow-end.gif);
+}
+
+.f3-rootline-lines .f3-rootline-elbow-end-plus{
+	background-image:url(../images/default/tree/elbow-end-plus.gif);
+}
+
+.f3-rootline-lines .f3-rootline-elbow-end-minus{
+	background-image:url(../images/default/tree/elbow-end-minus.gif);
+}
+
+.f3-rootline-lines .f3-rootline-elbow-line{
+	background-image:url(../images/default/tree/elbow-line.gif);
+}
+
+.f3-rootline-no-lines .f3-rootline-elbow-plus{
+	background-image:url(../images/default/tree/elbow-plus-nl.gif);
+}
+
+.f3-rootline-no-lines .f3-rootline-elbow-minus{
+	background-image:url(../images/default/tree/elbow-minus-nl.gif);
+}
+
+.f3-rootline-no-lines .f3-rootline-elbow-end-plus{
+	background-image:url(../images/default/tree/elbow-end-plus-nl.gif);
+}
+
+.f3-rootline-no-lines .f3-rootline-elbow-end-minus{
+	background-image:url(../images/default/tree/elbow-end-minus-nl.gif);
+}
+
+.f3-rootline-arrows .f3-rootline-elbow-plus{
+    background-image:url(../images/default/tree/arrows.gif);
+}
+
+.f3-rootline-arrows .f3-rootline-elbow-minus{
+    background-image:url(../images/default/tree/arrows.gif);
+}
+
+.f3-rootline-arrows .f3-rootline-elbow-end-plus{
+    background-image:url(../images/default/tree/arrows.gif);
+}
+
+.f3-rootline-arrows .f3-rootline-elbow-end-minus{
+    background-image:url(../images/default/tree/arrows.gif);
+}
+
+.data {
+	background-image: url('icon.gif');
+	background-position: 0 0;
+	background-repeat: no-repeat;
+}*/
