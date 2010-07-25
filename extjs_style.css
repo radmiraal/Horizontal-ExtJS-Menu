@@ -1,0 +1,53 @@
+.x-tree-node-icon {
+	background-size: 16px 16px;
+	-moz-background-size: 16px 16px;
+}
+
+.x-tree-node-icon.settings {
+	background-image: url('Resources/Public/Backend/Icons/categories/preferences-system.png');
+}
+.x-tree-node-icon.development {
+	background-image: url('Resources/Public/Backend/Icons/categories/applications-development.png');
+}
+.x-tree-node-icon.accessories {
+	background-image: url('Resources/Public/Backend/Icons/categories/applications-accessories.png');
+}
+.x-tree-node-icon.games {
+	background-image: url('Resources/Public/Backend/Icons/categories/applications-games.png');
+}
+.x-tree-node-icon.graphics {
+	background-image: url('Resources/Public/Backend/Icons/categories/applications-graphics.png');
+}
+.x-tree-node-icon.audio {
+	background-image: url('Resources/Public/Backend/Icons/mimetypes/audio-x-generic.png');
+}
+.x-tree-node-icon.font {
+	background-image: url('Resources/Public/Backend/Icons/mimetypes/font-x-generic.png');
+}
+.x-tree-node-icon.open {
+	background-image: url('Resources/Public/Backend/Icons/actions/document-open.png');
+}
+.x-tree-node-icon.edit {
+	background-image: url('Resources/Public/Backend/Icons/actions/edit-select-all.png');
+}
+.x-tree-node-icon.delete {
+	background-image: url('Resources/Public/Backend/Icons/actions/edit-delete.png');
+}
+.x-tree-node-icon.contact {
+	background-image: url('Resources/Public/Backend/Icons/actions/contact-new.png');
+}
+.x-tree-node-icon.italic {
+	background-image: url('Resources/Public/Backend/Icons/actions/format-text-italic.png');
+}
+.x-tree-node-icon.bold {
+	background-image: url('Resources/Public/Backend/Icons/actions/format-text-bold.png');
+}
+.x-tree-node-icon.underline {
+	background-image: url('Resources/Public/Backend/Icons/actions/format-text-underline.png');
+}
+.x-tree-node-icon.text {
+	background-image: url('Resources/Public/Backend/Icons/mimetypes/text-x-generic.png');
+}
+.x-tree-node-icon.video {
+	background-image: url('Resources/Public/Backend/Icons/mimetypes/video-x-generic.png');
+}
