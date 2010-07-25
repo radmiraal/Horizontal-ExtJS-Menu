@@ -1,0 +1,26 @@
+body {
+	font-family: verdana, arial;
+	font-size: 11px;
+	background-color: #6a6a6a;
+}
+
+a {
+	text-decoration: none;
+}
+
+.x-rootline-node-ct {
+	float: left;
+}
+
+.f3-rootline-node-icon {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+}
+
+.f3-rootline-node-icon.folder {
+	background-image: url('icon.gif');
+	border: solid 1px red;
+	background-position: 0 0;
+	background-repeat: repeat;
+}
