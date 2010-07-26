@@ -6,11 +6,15 @@ F3.TYPO3.UserInterface.Breadcrumb.NodeUI = function() {
 
 Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 
+	_nodeHeight: 0,
+
 	renderElements: function(n, a, targetNode, bulkRender) {
+		this._nodeHeight = Ext.get(Ext.query('.f3-breadcrumb')[0]).getHeight();
+		
 		var href = a.href ? a.href : Ext.isGecko ? "" : "#";
 
 		var buf = [
-			'<span class="x-rootline-node">',
+			'<span class="f3-breadcrumb-node">',
 				'<span ext:tree-node-id="', n.id,
 				'" class="f3-breadcrumb-node-el f3-breadcrumb-node-leaf x-unselectable ', a.cls,
 				'" unselectable="on">',
@@ -48,6 +52,14 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 		this.anchor		= cs[index];
 		this.textNode	= cs[1];
 	},
+
+	onOver : function(e){
+        this.addClass('f3-breadcrumb-node-over');
+    },
+
+    onOut : function(e){
+        this.removeClass('f3-breadcrumb-node-over');
+    },
 
 	    // private
     onClick : function(e){
@@ -102,11 +114,9 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
         }
         this.animating = true;
         this.updateExpandIcon();
-		
+
 		ct.setStyle({
-			overflow: 'hidden',
-			width: 20,
-			height: 30,
+			height: this._nodeHeight,
 			display: 'inline-block'
 		});
 
@@ -115,12 +125,41 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 				this.animating = false;
 				Ext.callback(callback);
 			},
+			opacity: 1,
+			easing: 'easeOut',
 			scope: this,
-			width: 100,
-			height: ct.getHeight(),
+			height: this._nodeHeight,
 			duration: this.node.ownerTree.duration || .25
 		});
+
+		this.siblings({'display':'none'});
     },
+
+	siblings: function(newStyle) {
+//		var ct = Ext.get(this.ctNode);
+//		var parent = ct.parent();
+//
+//		var siblings = [];
+//
+//		var counter = 0;
+//		var read = true;
+//		do {
+//			var sibling = parent.next();
+//			console.log(sibling);
+//			if (sibling == null) {
+//				read = false;
+//			} else if (sibling !== ct) {
+//				siblings.push(sibling);
+//				if (newStyle) {
+//					console.log('set new style');
+//					sibling.setStyle(newStyle);
+//				}
+//			}
+//			counter ++;
+//		} while (read == true || counter < 1000);
+//
+//		return siblings;
+	},
 
 	// private
     animCollapse : function(callback){
@@ -130,15 +169,19 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
         this.animating = true;
         this.updateExpandIcon();
 
-		ct.shift({
-			callback : function() {
+//		ct.shift({
+//			callback : function() {
 				this.animating = false;
 				Ext.callback(callback);
-			},
-			scope: this,
-			width: 0,
-			duration: this.node.ownerTree.duration || .25
-		});
+				ct.setStyle({'display': 'none'});
+//			},
+//			scope: this,
+//			width: 0,
+//			opacity: 0,
+//			easing: 'easeOut',
+//			height: this._nodeHeight,
+//			duration: this.node.ownerTree.duration || .25
+//		});
     },
 
 	    // private

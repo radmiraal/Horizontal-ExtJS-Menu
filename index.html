@@ -6,18 +6,25 @@
         <title>Tree</title>
 
 		<link rel="stylesheet" type="text/css" href="ext-3.2.1/resources/css/ext-all.css" />
-		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="stylesheet" type="text/css" href="Resources/Public/Backend/CSS/style.css" />
 
 		<script type="text/javascript" src="ext-3.2.1/adapter/ext/ext-base.js"></script>
 		<script type="text/javascript" src="ext-3.2.1/ext-all.js"></script>
+		<script type="text/javascript" src="ext.util.css.js"></script>
 
-		<script type="text/javascript" src="TreePanel.js"></script>
-		<script type="text/javascript" src="RootTreeNodeUI.js"></script>
-		<script type="text/javascript" src="AsyncTreeNode.js"></script>
-		<script type="text/javascript" src="TreeEventModel.js"></script>
-		<script type="text/javascript" src="TreeLoader.js"></script>
-		<script type="text/javascript" src="TreeNodeUI.js"></script>
+		<script type="text/javascript">
+			Ext.ns('F3');
+			Ext.ns('F3.TYPO3');
+			Ext.ns('F3.TYPO3.UserInterface');
+		</script>
 
+		<script type="text/javascript" src="Resources/Public/Backend/JavaScript/UserInterface/Breadcrumb.js"></script>
+		<script type="text/javascript" src="Resources/Public/Backend/JavaScript/UserInterface/Breadcrumb/NodeUI.js"></script>
+		<script type="text/javascript" src="Resources/Public/Backend/JavaScript/UserInterface/Breadcrumb/AsyncNode.js"></script>
+		<script type="text/javascript" src="Resources/Public/Backend/JavaScript/UserInterface/Breadcrumb/EventModel.js"></script>
+		<script type="text/javascript" src="Resources/Public/Backend/JavaScript/UserInterface/Breadcrumb/Loader.js"></script>
+		<script type="text/javascript" src="Resources/Public/Backend/JavaScript/UserInterface/Breadcrumb/RootNodeUI.js"></script>
+		
 		<script type="text/javascript" src="structure.js"></script>
 		<script type="text/javascript" src="tree.js"></script>
 

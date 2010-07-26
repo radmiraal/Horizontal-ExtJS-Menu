@@ -1,66 +1,78 @@
 var children = [{
 	text:'Model',
-	iconCls: 'data',
+	iconCls: 'settings',
 	children:[{
 		text:'Object 1',
-		iconCls: 'data',
+		iconCls: 'audio',
 		children:[{
 			text: 'Properties',
-			iconCls: 'data',
+			iconCls: 'open',
 			leaf: true
 
 		}, {
 			text: 'TCA',
-			leaf: true
+			leaf: true,
+			iconCls: 'edit'
 		}, {
 			text: 'Localization',
-			leaf: true
+			leaf: true,
+			iconCls: 'delete'
 		}]
 	}, {
 		text:'Object 2',
+		iconCls: 'font',
 		children:[{
 			text: 'Properties',
-			leaf: true
+			leaf: true,
+			iconCls: 'open'
 		}, {
 			text: 'TCA',
-			leaf: true
+			leaf: true,
+			iconCls: 'edit'
 		}, {
 			text: 'Localization',
-			leaf: true
+			leaf: true,
+			iconCls: 'delete'
 		}]
 	}]
 }, {
 	text: 'Controllers',
-	
+	iconCls: 'development',
 	children: [{
 		text: 'IndexController',
-		leaf: true
+		leaf: true,
+		iconCls: 'contact'
 	}, {
 		text: 'ObjectController',
-		leaf: true
+		leaf: true,
+		iconCls: 'italic'
 	}]
 },{
-	text:'Frontend Plugins',
-	
+	text:'Frontend Plugins',	
+	iconCls: 'games',
 	children:[{
 		text:'Plugin 1',
-		leaf:true
+		leaf:true,
+		iconCls: 'bold'
 	}, {
 		text:'Plugin 2',
-		leaf:true
+		leaf:true,
+		iconCls: 'underline'
 	}]
 }, {
 	text: 'Backend Modules',
-	
+	iconCls: 'accessories',
 	children:[{
 		text: 'Module 1',
-		leaf: true
+		leaf: true,
+		iconCls: 'text'
 	}]
 }, {
 	text: 'Scheduler tasks',
-	
+	iconCls: 'graphics',
 	children:[{
 		text: 'Task 1',
-		leaf: true
+		leaf: true,
+		iconCls: 'video'
 	}]
 }];

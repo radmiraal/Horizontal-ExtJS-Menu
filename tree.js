@@ -1,47 +1,37 @@
-Ext.tree.HorizontalTreeLoader = Ext.extend(Ext.tree.TreeLoader, {
-	createNode : function(attr) {
-		if (!attr.uiProvider) {
-			attr.uiProvider = Ext.tree.SelectNodeUI;
-		}
-		attr.singleClickExpand = true;
-        return Ext.tree.TreeLoader.prototype.createNode.call(this, attr);
-    }
-});
+var useExtTree = false;
+//useExtTree = true;
 
+Ext.onReady(function() {
 
-//Ext.reg('Ext.tree.HorizontalTreeLoader', Ext.ux.TreeLoader);
+	var rootNodeConfig = {
+		expanded		: true,
+		leaf			: false,
+		text			: 'Tree Root',
+		children		: children
+	};
 
+	var treeConfig = {
+		renderTo		: Ext.getBody(),
+		singleExpand	: 1,
+		animate			: true,
+		enableDD		: false,
+		containerScroll	: true,
+		border			: false,
+		rootVisible		: false
+	};
 
-Ext.onReady(function(){
-
-	//var tree = new Ext.tree.TreePanel({
-	var tree = new Tx.TreePanel({
-		renderTo: Ext.getBody(),
-		singleExpand: 1,
-		//useArrows: true,
-		//autoScroll: true,
-		//unstyled: true,
-		animate: true,
-		enableDD: false,
-		containerScroll: true,
-		border: false,
-//		loader: new Ext.tree.TreeLoader({
-//			//loader: new Ext.ux.TreeLoader({
-//			uiProviders: {
-//				select: Ext.tree.SelectNodeUI
-//			}
-//		}),
-		loader: new Ext.tree.HorizontalTreeLoader(),
-		rootVisible: false,
-		//root: new Ext.tree.AsyncTreeNode({
-		root: new Tx.AsyncTreeNode({
-			expanded:true,
-			leaf:false,
-			text:'Tree Root',
-			uiProvider: Tx.RootTreeNodeUI,
-			children:children
-		})
-	});
+	if (useExtTree == false) {
+		rootNodeConfig.uiProvider = F3.TYPO3.UserInterface.Breadcrumb.RootNodeUI;
+		treeConfig.loader = new F3.TYPO3.UserInterface.Breadcrumb.Loader();
+		treeConfig.root = new F3.TYPO3.UserInterface.Breadcrumb.AsyncNode(rootNodeConfig);
+		var tree = new F3.TYPO3.UserInterface.Breadcrumb(treeConfig);
+	} else {
+//		Ext.util.CSS.addStyleSheet('extjs_style.css', 'extjs_style');
+		Ext.util.CSS.swapStyleSheet('extjs_style.css', 'extjs_style');
+		treeConfig.root = new Ext.tree.AsyncTreeNode(rootNodeConfig);
+		treeConfig.singleExpand = 0;
+		var tree = new Ext.tree.TreePanel(treeConfig);
+	}
 
 	tree.getRootNode().expand();
-});3
+});
