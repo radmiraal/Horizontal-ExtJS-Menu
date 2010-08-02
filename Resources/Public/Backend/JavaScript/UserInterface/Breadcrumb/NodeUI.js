@@ -117,7 +117,8 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 
 		ct.setStyle({
 			height: this._nodeHeight,
-			display: 'inline-block'
+			display: 'inline-block',
+			width: 1
 		});
 
 		ct.shift({
@@ -129,10 +130,13 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 			easing: 'easeOut',
 			scope: this,
 			height: this._nodeHeight,
+			width: this.node.childNodes.length * this._nodeHeight,
 			duration: this.node.ownerTree.duration || .25
 		});
 
-		this.siblings({'display':'none'});
+		
+
+//		this.siblings({'display':'none'});
     },
 
 	siblings: function(newStyle) {
@@ -169,19 +173,19 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
         this.animating = true;
         this.updateExpandIcon();
 
-//		ct.shift({
-//			callback : function() {
+		ct.shift({
+			callback : function() {
 				this.animating = false;
 				Ext.callback(callback);
 				ct.setStyle({'display': 'none'});
-//			},
-//			scope: this,
-//			width: 0,
-//			opacity: 0,
-//			easing: 'easeOut',
-//			height: this._nodeHeight,
-//			duration: this.node.ownerTree.duration || .25
-//		});
+			},
+			scope: this,
+			width: 0,
+			opacity: 0,
+			easing: 'easeOut',
+			height: this._nodeHeight,
+			duration: this.node.ownerTree.duration || .25
+		});
     },
 
 	    // private

@@ -12,15 +12,37 @@ a {
 .f3-breadcrumb-node-ct {
 	display: inline-block;
 	height: 47px;
+	float: left;
+	width: 1px;
+	overflow: hidden;
+}
+
+.f3-breadcrumb-node-ct > * {
+	float: left;
 }
 
 .f3-breadcrumb-node {
 	display: inline-block;
+	overflow: hidden;
+	float: left;
+	height: 47px;
 }
+
+.f3-breadcrumb-node-el {
+	float: left;
+	width: 47px;
+}
+
 
 .f3-breadcrumb-root-node {
 	display: block;
 	background-color: #6a6a6a;
+	overflow: hidden;
+	height: 47px;
+}
+
+.f3-breadcrumb-node > *, .f3-breadcrumb-root-node > * {
+	float: left;
 }
 
 .f3-breadcrumb-node-icon {
@@ -42,7 +64,7 @@ a {
 }
 
 .f3-breadcrumb-node-over .f3-breadcrumb-node-anchor {
-	display: inline-block;
+/*	display: inline-block;*/
 }
 
 .f3-breadcrumb-node-icon.settings {
