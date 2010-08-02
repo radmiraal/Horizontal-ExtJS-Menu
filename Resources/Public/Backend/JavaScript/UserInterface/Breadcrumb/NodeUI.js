@@ -62,6 +62,9 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 
 		var tn = Ext.get(this.textNode);
 
+		var res = Ext.query('.f3-breadcrumb-node-el-label', this.textNode);
+		var childTextNode = Ext.get(res[0]);
+		
 		var textNodes = Ext.query('.f3-breadcrumb-node-anchor');
 		Ext.each(textNodes, function (node, i) {
 			var n = Ext.get(node);
@@ -91,7 +94,7 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 			easing: 'easeOut',
 			height: 47,
 			scope: this,
-			width: 50,
+			width: childTextNode.getTextWidth(),
 			duration: this.node.ownerTree.duration || .25
 		});
     },
