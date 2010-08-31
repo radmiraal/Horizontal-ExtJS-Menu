@@ -1,0 +1,61 @@
+.f3-breadcrumb-node-icon {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border: 1px solid #505050;
+	background-color: #7b7b7b;
+	padding: 10px;
+	width: 22px;
+	height: 22px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+.f3-breadcrumb-node-icon.settings {
+	background-image: url('../Icons/categories/preferences-system.png');
+}
+.f3-breadcrumb-node-icon.development {
+	background-image: url('../Icons/categories/applications-development.png');
+}
+.f3-breadcrumb-node-icon.accessories {
+	background-image: url('../Icons/categories/applications-accessories.png');
+}
+.f3-breadcrumb-node-icon.games {
+	background-image: url('../Icons/categories/applications-games.png');
+}
+.f3-breadcrumb-node-icon.graphics {
+	background-image: url('../Icons/categories/applications-graphics.png');
+}
+.f3-breadcrumb-node-icon.audio {
+	background-image: url('../Icons/mimetypes/audio-x-generic.png');
+}
+.f3-breadcrumb-node-icon.font {
+	background-image: url('../Icons/mimetypes/font-x-generic.png');
+}
+.f3-breadcrumb-node-icon.open {
+	background-image: url('../Icons/actions/document-open.png');
+}
+.f3-breadcrumb-node-icon.edit {
+	background-image: url('../Icons/actions/edit-select-all.png');
+}
+.f3-breadcrumb-node-icon.delete {
+	background-image: url('../Icons/actions/edit-delete.png');
+}
+.f3-breadcrumb-node-icon.contact {
+	background-image: url('../Icons/actions/contact-new.png');
+}
+.f3-breadcrumb-node-icon.italic {
+	background-image: url('../Icons/actions/format-text-italic.png');
+}
+.f3-breadcrumb-node-icon.bold {
+	background-image: url('../Icons/actions/format-text-bold.png');
+}
+.f3-breadcrumb-node-icon.underline {
+	background-image: url('../Icons/actions/format-text-underline.png');
+}
+.f3-breadcrumb-node-icon.text {
+	background-image: url('../Icons/mimetypes/text-x-generic.png');
+}
+.f3-breadcrumb-node-icon.video {
+	background-image: url('../Icons/mimetypes/video-x-generic.png');
+}
