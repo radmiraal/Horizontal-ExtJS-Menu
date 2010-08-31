@@ -1,9 +1,15 @@
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
 .f3-breadcrumb-node {
-	float: left;
+}
+
+.f3-breadcrumb-node-ct > * {
 }
 
 .f3-breadcrumb-node-el {
-	float: left;
 }
 
 .f3-breadcrumb-root-node {
@@ -12,7 +18,6 @@
 }
 
 .f3-breadcrumb-node-anchor {
-
 	height: 47px;
 	display: none;
 }
@@ -21,3 +26,6 @@
 /*	display: inline-block;*/
 }
 
+.x-tree-ec-icon {
+	display: none;
+}

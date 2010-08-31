@@ -55,69 +55,69 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 	},
 
 	onOver : function(e){
-		if (this.animating == true) {
-			return;
-		}
-		this.animating = true;
-
-		var tn = Ext.get(this.textNode);
-
-		var res = Ext.query('.f3-breadcrumb-node-el-label', this.textNode);
-		var childTextNode = Ext.get(res[0]);
-		
-		var textNodes = Ext.query('.f3-breadcrumb-node-anchor');
-		Ext.each(textNodes, function (node, i) {
-			var n = Ext.get(node);
-			if (n == tn) {
-				return;
-			}
-			n.animating = false;
-			n.shift({
-				width:0,
-				duration:.1,
-				callback: function() {
-					n.setStyle({display:'none'});
-				}
-			});
-		});
-
-		tn.setStyle({
-			height: 47,
-			display: 'inline-block',
-			width: 1
-		});
-
-		tn.shift({
-			callback : function() {
-				this.animating = false;
-			},
-			easing: 'easeOut',
-			height: 47,
-			scope: this,
-			width: childTextNode.getTextWidth(),
-			duration: this.node.ownerTree.duration || .25
-		});
+//		if (this.animating == true) {
+//			return;
+//		}
+//		this.animating = true;
+//
+//		var tn = Ext.get(this.textNode);
+//
+//		var res = Ext.query('.f3-breadcrumb-node-el-label', this.textNode);
+//		var childTextNode = Ext.get(res[0]);
+//
+//		var textNodes = Ext.query('.f3-breadcrumb-node-anchor');
+//		Ext.each(textNodes, function (node, i) {
+//			var n = Ext.get(node);
+//			if (n == tn) {
+//				return;
+//			}
+//			n.animating = false;
+//			n.shift({
+//				width:0,
+//				duration:.1,
+//				callback: function() {
+//					n.setStyle({display:'none'});
+//				}
+//			});
+//		});
+//
+//		tn.setStyle({
+//			height: 45,
+//			display: 'inline-block',
+//			width: 1
+//		});
+//
+//		tn.shift({
+//			callback : function() {
+//				this.animating = false;
+//			},
+//			easing: 'easeOut',
+//			height: 45,
+//			scope: this,
+//			width: childTextNode.getTextWidth(),
+//			duration: this.node.ownerTree.duration || .25
+//		});
     },
 
     onOut : function(e){
-		if (this.animating == true) {
-			return;
-		}
-        this.animating = true;
-
-		var tn = Ext.get(this.textNode);
-
-		tn.shift({
-			callback : function() {
-				this.animating = false;
-				tn.setStyle({display: 'none'});
-			},
-			easing: 'easeOut',
-			height: 47,
-			scope: this,
-			width: 1,
-			duration: this.node.ownerTree.duration || .25
-		});
+//		if (this.animating == true) {
+//			return;
+//		}
+//        this.animating = true;
+//
+//		var tn = Ext.get(this.textNode);
+//
+//		tn.shift({
+//			callback : function() {
+//				this.animating = false;
+//				tn.setStyle({display: 'none'});
+//			},
+//			easing: 'easeOut',
+//			height: 45,
+//			scope: this,
+//			width: 1,
+//			duration: this.node.ownerTree.duration || .25
+//		});
     },
 
 	    // private
@@ -174,25 +174,40 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
         this.animating = true;
         this.updateExpandIcon();
 
-		ct.setStyle({
+		var hiddenStyle = {
 			height: this._nodeHeight,
 			display: 'inline-block',
-			width: 1
-		});
+			width: 0
+		};
 
-		ct.shift({
-			callback : function() {
-				this.animating = false;
-				Ext.callback(callback);
-			},
+		ct.setStyle(hiddenStyle);
+		ct.child('.f3-breadcrumb-node-ct').setStyle(hiddenStyle);
+
+		var newIconStyle = {
 			opacity: 1,
 			easing: 'easeOut',
-			scope: this,
-			height: this._nodeHeight,
-			width: this.node.childNodes.length * this._nodeHeight,
+			height: 45,
+			width: 45,
 			duration: this.node.ownerTree.duration || .25
-		});
+		};
+//		newIconStyle.callback = function() {
+//			this.animating = false;
+//			Ext.callback(callback);
+//		};
+//		newIconStyle.scope = this;
 
+		ct.select('.f3-breadcrumb-node-icon').shift(newIconStyle);
+		ct.select('*').setStyle({height:45,opacity:1});
+
+		var newContainerStyle = newIconStyle;
+		newContainerStyle.width = this.node.childNodes.length * this._nodeHeight;
+		newContainerStyle.callback = function() {
+			this.animating = false;
+			Ext.callback(callback);
+		};
+		newContainerStyle.scope = this;
+
+		ct.shift(newContainerStyle);
 		
 
 //		this.siblings({'display':'none'});
@@ -232,19 +247,22 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
         this.animating = true;
         this.updateExpandIcon();
 
-		ct.shift({
-			callback : function() {
-				this.animating = false;
-				Ext.callback(callback);
-				ct.setStyle({'display': 'none'});
-			},
-			scope: this,
+		var newStyle = {
 			width: 0,
 			opacity: 0,
 			easing: 'easeOut',
-			height: this._nodeHeight,
+			height: 45,
 			duration: this.node.ownerTree.duration || .25
-		});
+		};
+		
+		ct.select('*').shift(newStyle);
+		newStyle.callback = function() {
+			this.animating = false;
+			Ext.callback(callback);
+			ct.setStyle({'display': 'none'});
+		};
+		newStyle.scope = this;
+		ct.shift(newStyle);
     },
 
 	    // private
