@@ -21,33 +21,20 @@
 Ext.namespace('F3.TYPO3.UserInterface.Breadcrumb');
 
 /**
- * @class F3.TYPO3.UserInterface.Breadcrumb.Loader
+ * @class F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler
  *
  *
  *
  * @namespace F3.TYPO3.UserInterface.Breadcrumb
- * @extends Ext.tree.TreeLoader
  * @author Rens Admiraal <rens@rensnel.nl>
  * @version $Id $
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @demo http://phoenix.demo.typo3.org/
  */
 
-F3.TYPO3.UserInterface.Breadcrumb.Loader = Ext.extend(Ext.tree.TreeLoader, {
+F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler = {
 
-	/**
-	 * @param {Object} attr
-	 * @return {Object}
-	 * @public
-	 */
-	createNode : function(attr) {
-		if (!attr.uiProvider) {
-			attr.uiProvider = F3.TYPO3.UserInterface.Breadcrumb.NodeUI;
-		}
-		attr.singleClickExpand = true;
-        return Ext.tree.TreeLoader.prototype.createNode.call(this, attr);
-    }
-});
+};
 
 // Register class as xtype
-Ext.reg('F3.TYPO3.UserInterface.Breadcrumb.Loader', F3.TYPO3.UserInterface.Breadcrumb.Loader);
+Ext.reg('F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler', F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler);

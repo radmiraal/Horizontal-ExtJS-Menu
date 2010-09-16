@@ -11,7 +11,7 @@ Ext.onReady(function() {
 	};
 
 	var treeConfig = {
-		renderTo		: Ext.getBody(),
+		renderTo		: Ext.get('menu'),
 		singleExpand	: 1,
 		animate			: true,
 		enableDD		: false,
@@ -34,4 +34,6 @@ Ext.onReady(function() {
 	}
 
 	tree.getRootNode().expand();
+
+	Ext.get('debug');
 });

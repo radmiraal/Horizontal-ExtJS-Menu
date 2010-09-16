@@ -1,4 +1,37 @@
-Ext.ns('F3.TYPO3.UserInterface.Breadcrumb');
+/*                                                                        *
+ * This script belongs to the TYPO3 project.                              *
+ *                                                                        *
+ * It is free software; you can redistribute it and/or modify it under    *
+ * the terms of the GNU Lesser General Public License as published by the *
+ * Free Software Foundation, either version 3 of the License, or (at your *
+ * option) any later version.                                             *
+ *                                                                        *
+ * This script is distributed in the hope that it will be useful, but     *
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHAN-    *
+ * TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser       *
+ * General Public License for more details.                               *
+ *                                                                        *
+ * You should have received a copy of the GNU Lesser General Public       *
+ * License along with the script.                                         *
+ * If not, see http://www.gnu.org/licenses/lgpl.html                      *
+ *                                                                        *
+ * The TYPO3 project - inspiring people to share!                         *
+ *                                                                        */
+
+Ext.namespace('F3.TYPO3.UserInterface.Breadcrumb');
+
+/**
+ * @class F3.TYPO3.UserInterface.Breadcrumb.EventModel
+ *
+ *
+ *
+ * @namespace F3.TYPO3.UserInterface.Breadcrumb
+ * @extends Ext.tree.TreeEventModel
+ * @author Rens Admiraal <rens@rensnel.nl>
+ * @version $Id $
+ * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @demo http://phoenix.demo.typo3.org/
+ */
 
 F3.TYPO3.UserInterface.Breadcrumb.EventModel = function() {
     F3.TYPO3.UserInterface.Breadcrumb.EventModel.superclass.constructor.apply(this, arguments);
@@ -6,6 +39,10 @@ F3.TYPO3.UserInterface.Breadcrumb.EventModel = function() {
 
 Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.EventModel, Ext.tree.TreeEventModel, {
 
+	/**
+	 * @return {void}
+	 * @public
+	 */
 	initEvents : function(){
         var t = this.tree;
 
@@ -24,6 +61,11 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.EventModel, Ext.tree.TreeEventModel
         });
     },
 
+	/**
+	 * @param {Object} e
+	 * @return {Object}
+	 * @public
+	 */
     getNode : function(e){
         var t;
         if(t = e.getTarget('.f3-breadcrumb-node-el', 10)){
@@ -35,6 +77,11 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.EventModel, Ext.tree.TreeEventModel
         return null;
     },
 
+	/**
+	 * @param {Object} e
+	 * @return {Object}
+	 * @public
+	 */
     getNodeTarget : function(e){
         var t = e.getTarget('.f3-breadcrumb-node-icon', 1);
         if(!t){
@@ -43,6 +90,12 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.EventModel, Ext.tree.TreeEventModel
         return t;
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} t
+	 * @return {void}
+	 * @public
+	 */
     delegateOut : function(e, t){
         if(!this.beforeEvent(e)){
             return;
@@ -59,6 +112,12 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.EventModel, Ext.tree.TreeEventModel
         }
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} t
+	 * @return {void}
+	 * @public
+	 */
     delegateOver : function(e, t){
         if(!this.beforeEvent(e)){
             return;
@@ -80,6 +139,11 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.EventModel, Ext.tree.TreeEventModel
         }
     },
 
+	/**
+	 * @param {Object} e
+	 * @return {void}
+	 * @public
+	 */
     trackExit : function(e){
         if(this.lastOverNode){
             if(this.lastOverNode.ui && !e.within(this.lastOverNode.ui.getEl())){
@@ -92,6 +156,12 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.EventModel, Ext.tree.TreeEventModel
 
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} t
+	 * @return {void}
+	 * @public
+	 */
     delegateClick : function(e, t){
         if(this.beforeEvent(e)){
             if(e.getTarget('input[type=checkbox]', 1)){
@@ -106,6 +176,12 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.EventModel, Ext.tree.TreeEventModel
         }
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} t
+	 * @return {void}
+	 * @public
+	 */
     delegateDblClick : function(e, t){
         if(this.beforeEvent(e)){
             if(this.getNodeTarget(e)){
@@ -116,6 +192,12 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.EventModel, Ext.tree.TreeEventModel
         }
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} t
+	 * @return {void}
+	 * @public
+	 */
     delegateContextMenu : function(e, t){
         if(this.beforeEvent(e)){
             if(this.getNodeTarget(e)){
@@ -126,6 +208,12 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.EventModel, Ext.tree.TreeEventModel
         }
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} type
+	 * @return {Boolean}
+	 * @public
+	 */
     checkContainerEvent: function(e, type){
         if(this.disabled){
             e.stopEvent();
@@ -134,47 +222,112 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.EventModel, Ext.tree.TreeEventModel
         this.onContainerEvent(e, type);
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} type
+	 * @return {void}
+	 * @public
+	 */
     onContainerEvent: function(e, type){
         this.tree.fireEvent('container' + type, this.tree, e);
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} node
+	 * @return {void}
+	 * @public
+	 */
     onNodeClick : function(e, node){
         node.ui.onClick(e);
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} node
+	 * @return {void}
+	 * @public
+	 */
     onNodeOver : function(e, node){
         this.lastOverNode = node;
         node.ui.onOver(e);
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} node
+	 * @return {void}
+	 * @public
+	 */
     onNodeOut : function(e, node){
         node.ui.onOut(e);
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} node
+	 * @return {void}
+	 * @public
+	 */
     onIconOver : function(e, node){
         node.ui.addClass('f3-breadcrumb-ec-over');
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} node
+	 * @return {void}
+	 * @public
+	 */
     onIconOut : function(e, node){
         node.ui.removeClass('f3-breadcrumb-ec-over');
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} node
+	 * @return {void}
+	 * @public
+	 */
     onIconClick : function(e, node){
         node.ui.ecClick(e);
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} node
+	 * @return {void}
+	 * @public
+	 */
     onCheckboxClick : function(e, node){
         node.ui.onCheckChange(e);
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} node
+	 * @return {void}
+	 * @public
+	 */
     onNodeDblClick : function(e, node){
         node.ui.onDblClick(e);
     },
 
+	/**
+	 * @param {Object} e
+	 * @param {Object} node
+	 * @return {void}
+	 * @public
+	 */
     onNodeContextMenu : function(e, node){
         node.ui.onContextMenu(e);
     },
 
+	/**
+	 * @param {Object} e
+	 * @return {Boolean}
+	 * @public
+	 */
     beforeEvent : function(e){
         var node = this.getNode(e);
         if(this.disabled || !node || !node.ui){
@@ -184,13 +337,22 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.EventModel, Ext.tree.TreeEventModel
         return true;
     },
 
+	/**
+	 * @return {void}
+	 * @public
+	 */
     disable: function(){
         this.disabled = true;
     },
 
+	/**
+	 * @return {void}
+	 * @public
+	 */
     enable: function(){
         this.disabled = false;
     }
 });
 
+// Register class as xtype
 Ext.reg('F3.TYPO3.UserInterface.Breadcrumb.EventModel', F3.TYPO3.UserInterface.Breadcrumb.EventModel);

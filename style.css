@@ -8,3 +8,24 @@ a {
 	text-decoration: none;
 	color: white;
 }
+
+.f3-breadcrumb-node-ct {
+	float: left;
+}
+
+.f3-breadcrumb-node-ct, .f3-breadcrumb-node {
+	height: 45px;
+	display: inline-block;
+}
+
+.f3-breadcrumb-root-node > .f3-breadcrumb-node {
+	width: 45px;
+}
+
+.f3-breadcrumb-node, .f3-breadcrumb-node * {
+	overflow: hidden;
+}
+
+.f3-breadcrumb-node-el {
+	float: left;
+}
