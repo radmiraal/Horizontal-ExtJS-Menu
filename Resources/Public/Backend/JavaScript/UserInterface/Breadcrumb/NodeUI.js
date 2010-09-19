@@ -100,7 +100,8 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 	 * @return {void}
 	 * @private
 	 */
-	onOver : function(e){
+	onOver : function(e) {
+		F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler.nodeOnOver(this, e);
     },
 
 	/**
@@ -108,40 +109,8 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 	 * @return {void}
 	 * @private
 	 */
-    onOut : function(e){
-    },
-
-	/**
-	 * @param {Object} e
-	 * @return {void}
-	 * @private
-	 */
-	onClick : function(e){
-        if(this.dropping){
-            e.stopEvent();
-            return;
-        }
-        if(this.fireEvent("beforeclick", this.node, e) !== false){
-            var a = e.getTarget('a');
-            if(!this.disabled && this.node.attributes.href && a){
-                this.fireEvent("click", this.node, e);
-                return;
-            }else if(a && e.ctrlKey){
-                e.stopEvent();
-            }
-            e.preventDefault();
-            if(this.disabled){
-                return;
-            }
-
-            if(this.node.attributes.singleClickExpand && !this.animating && this.node.isExpandable()){
-                this.node.toggle();
-            }
-
-            this.fireEvent("click", this.node, e);
-        }else{
-            e.stopEvent();
-        }
+    onOut : function(e) {
+		F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler.nodeOnOut(this, e);
     },
 
 
@@ -178,73 +147,8 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
         this.animating = true;
         this.updateExpandIcon();
 
-		var hiddenStyle = {
-			height: 47,
-			display: 'inline-block',
-			width: 0
-		};
-		ct.setStyle({display:'inline-block'});
-
-		// Now we calculate the new width of the container
-		var newContainerWidth = this.node.childNodes.length * 47;
-		var newContainerStyle = {
-			opacity: 1,
-			easing: 'easeOut',
-			height: 45,
-			width: newContainerWidth,
-			duration: this.node.ownerTree.duration || .25
-		};
-		ct.shift(newContainerStyle);
-
-		
-		/**
-		 * resize parent containers
-		 */
-		var currentParent = ct;
-
-		do {
-			currentParent = currentParent.findParentNode('.f3-breadcrumb-node-ct', 5, true);
-			if (currentParent) {
-				var width = currentParent.getWidth();
-
-				var newParentContainerStyle = {
-					width: width + newContainerWidth,
-					easing: 'easeOut',
-					duration: this.node.ownerTree.duration || .25
-				}
-				console.log(newParentContainerStyle);
-				currentParent.shift(newParentContainerStyle);
-				newParentContainerStyle.width = newParentContainerStyle.width + 45;
-				currentParent.findParentNode('.f3-breadcrumb-node', 5, true).shift(newParentContainerStyle);
-				
-			}
-		} while (currentParent);
-			
-		
-		
-
-		
-
-		var newNodeStyle = newContainerStyle;
-		newNodeStyle.width = newContainerStyle.width + 47;
-		newNodeStyle.callback = function() {
-			this.animating = false;
-			Ext.callback(callback);
-		}
-		newNodeStyle.scope = this;
-
-		
-
-		Ext.get(this.wrap).shift(newNodeStyle);
+		F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler.expandNode(ct, callback, this);
     },
-
-	/**
-	 * @param {Object} newStyle
-	 * @return {void}
-	 * @private
-	 */
-	siblings: function(newStyle) {
-	},
 
 	/**
 	 * @param {Function}
@@ -258,28 +162,7 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
         this.animating = true;
         this.updateExpandIcon();
 
-		var newStyle = {
-			width: 0,
-			opacity: 0,
-			easing: 'easeOut',
-			height: 45,
-			duration: this.node.ownerTree.duration || .25
-		};
-
-
-		
-		//ct.select('*').shift(newStyle);
-		ct.shift(newStyle);
-
-		newStyle.callback = function() {
-			this.animating = false;
-			Ext.callback(callback);
-		};
-		newStyle.width = 47;
-		newStyle.opacity = 1;
-		newStyle.scope = this;
-		
-		Ext.get(this.wrap).shift(newStyle);
+		F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler.collapseNode(ct, callback, this);
     },
 
 	/**

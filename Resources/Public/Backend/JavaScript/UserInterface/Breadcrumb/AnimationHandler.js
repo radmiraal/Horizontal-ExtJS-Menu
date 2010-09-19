@@ -34,6 +34,115 @@ Ext.namespace('F3.TYPO3.UserInterface.Breadcrumb');
 
 F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler = {
 
+	/**
+	 * @param {Object} ct
+	 * @param {Function} callback
+	 * @param {Object} scope
+	 * @return {void}
+	 * @public
+	 */
+	expandNode: function (ct, callback, scope) {
+		var hiddenStyle = {
+			height: 47,
+			display: 'inline-block',
+			width: 0
+		};
+		ct.setStyle({display:'inline-block'});
+
+		// Now we calculate the new width of the container
+		var newContainerWidth = scope.node.childNodes.length * 47;
+		var newContainerStyle = {
+			opacity: 1,
+			easing: 'easeOut',
+			height: 45,
+			width: newContainerWidth,
+			duration: scope.node.ownerTree.duration || .25
+		};
+		ct.shift(newContainerStyle);
+
+		/**
+		 * resize parent containers
+		 */
+		var currentParent = ct;
+
+		do {
+			currentParent = currentParent.findParentNode('.f3-breadcrumb-node-ct', 5, true);
+			if (currentParent) {
+				var width = currentParent.getWidth();
+
+				var newParentContainerStyle = {
+					width: width + newContainerWidth,
+					easing: 'easeOut',
+					duration: scope.node.ownerTree.duration || .25
+				}
+//				console.log(newParentContainerStyle);
+				currentParent.shift(newParentContainerStyle);
+				newParentContainerStyle.width = newParentContainerStyle.width + 45;
+				currentParent.findParentNode('.f3-breadcrumb-node', 5, true).shift(newParentContainerStyle);
+
+			}
+		} while (currentParent);
+
+		var newNodeStyle = newContainerStyle;
+		newNodeStyle.width = newContainerStyle.width + 47;
+		newNodeStyle.callback = function() {
+			scope.animating = false;
+			Ext.callback(callback);
+		}
+		newNodeStyle.scope = scope;
+
+		Ext.get(scope.wrap).shift(newNodeStyle);
+	},
+
+	/**
+	 * @param {Object} ct
+	 * @param {Function} callback
+	 * @param {Object} scope
+	 * @return {void}
+	 * @public
+	 */
+	collapseNode: function (ct, callback, scope) {
+		var newStyle = {
+			width: 0,
+			opacity: 0,
+			easing: 'easeOut',
+			height: 45,
+			duration: scope.node.ownerTree.duration || .25
+		};
+
+		//ct.select('*').shift(newStyle);
+		ct.shift(newStyle);
+
+		newStyle.callback = function() {
+			scope.animating = false;
+			Ext.callback(callback);
+		};
+		newStyle.width = 47;
+		newStyle.opacity = 1;
+		newStyle.scope = scope;
+
+		Ext.get(scope.wrap).shift(newStyle);
+	},
+
+	/**
+	 * @param {Object} scope
+	 * @param {Object} e
+	 * @return {void}
+	 * @public
+	 */
+	nodeOnOver: function (scope, e) {
+		
+	},
+
+	/**
+	 * @param {Object} scope
+	 * @param {Object} e
+	 * @return {void}
+	 * @public
+	 */
+	nodeOnOut: function (scope, e) {
+
+	}
 };
 
 // Register class as xtype
