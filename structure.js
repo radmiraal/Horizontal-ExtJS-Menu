@@ -7,7 +7,10 @@ var children = [{
 		children:[{
 			text: 'Properties',
 			iconCls: 'open',
-			leaf: true
+			children:[{
+				text: 'Sub sub child',
+				iconCls: 'delete'
+			}]
 
 		}, {
 			text: 'TCA',
