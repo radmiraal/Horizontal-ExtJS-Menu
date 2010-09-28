@@ -2,7 +2,7 @@
 	padding: 0px;
 	margin: 0px;
 }
-
+.f3-breadcrumb-node-ct {}
 .f3-breadcrumb-node {
 }
 
@@ -15,6 +15,7 @@
 .f3-breadcrumb-root-node {
 	background-color: #6a6a6a;
 	overflow: hidden;
+	
 }
 
 .f3-breadcrumb-node-anchor {

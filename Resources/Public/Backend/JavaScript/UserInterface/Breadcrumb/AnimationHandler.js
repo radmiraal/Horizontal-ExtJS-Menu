@@ -34,64 +34,49 @@ Ext.namespace('F3.TYPO3.UserInterface.Breadcrumb');
 
 F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler = {
 
-	/**
-	 * @param {Object} ct
-	 * @param {Function} callback
-	 * @param {Object} scope
-	 * @return {void}
-	 * @public
-	 */
-	expandNode: function (ct, callback, scope) {
-		var hiddenStyle = {
-			height: 47,
-			display: 'inline-block',
-			width: 0
-		};
+
+	_getVisibleChildNodesCount: function (node) {
+		return Ext.get(node.ui.ctNode).select('.f3-breadcrumb-node-icon').elements.length;
+	},
+
+	_setExpandedWidth: function(node) {
+		var childNodes = this._getVisibleChildNodesCount(node);
+		var ct = Ext.get(node.ui.ctNode);
+
+		Ext.get(node.ui.getEl()).setStyle({display:'inline-block'});
 		ct.setStyle({display:'inline-block'});
 
-		// Now we calculate the new width of the container
-		var newContainerWidth = scope.node.childNodes.length * 47;
-		var newContainerStyle = {
-			opacity: 1,
-			easing: 'easeOut',
-			height: 45,
-			width: newContainerWidth,
-			duration: scope.node.ownerTree.duration || .25
-		};
-		ct.shift(newContainerStyle);
+		this._setWidth(Ext.get(node.ui.getEl()), ct, childNodes * 47);
+	},
 
-		/**
-		 * resize parent containers
-		 */
-		var currentParent = ct;
+	_setCollapsedWidth: function (node) {
+//		var childNodes = node.parentNode.childNodes.length;
+/*
+		var childNodes = this._getVisibleChildNodesCount(node);
+		var ct = Ext.get(node.ui.ctNode);
 
-		do {
-			currentParent = currentParent.findParentNode('.f3-breadcrumb-node-ct', 5, true);
-			if (currentParent) {
-				var width = currentParent.getWidth();
+		var nodeElement =Ext.get(node.ui.getEl());
+		var container = ct;
 
-				var newParentContainerStyle = {
-					width: width + newContainerWidth,
-					easing: 'easeOut',
-					duration: scope.node.ownerTree.duration || .25
-				}
-//				console.log(newParentContainerStyle);
-				currentParent.shift(newParentContainerStyle);
-				newParentContainerStyle.width = newParentContainerStyle.width + 45;
-				currentParent.findParentNode('.f3-breadcrumb-node', 5, true).shift(newParentContainerStyle);
+		var newWidth = childNodes * 47;
+		container.setWidth(newWidth);
+		nodeElement.setWidth(newWidth + 47);
+		*/
 
-			}
-		} while (currentParent);
+//		this._setWidth(Ext.get(node.ui.getEl()), ct, childNodes * 47);
+//		return;
+//	console.log(node.parentNode.childNodes);
+//
+//
+//
+//		var newWidth = node.parentNode.childNodes.length * 47;
+//
+//		this._setWidth(Ext.get(node.ui.getEl()), ct, newWidth);
+	},
 
-		var newNodeStyle = newContainerStyle;
-		newNodeStyle.width = newContainerStyle.width + 47;
-		newNodeStyle.callback = function() {
-			scope.animating = false;
-			Ext.callback(callback);
-		}
-		newNodeStyle.scope = scope;
-
-		Ext.get(scope.wrap).shift(newNodeStyle);
+	_setWidth: function(nodeElement, container, width) {
+		nodeElement.setWidth(width + 47);
+		container.setWidth(width);
 	},
 
 	/**
@@ -102,27 +87,53 @@ F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler = {
 	 * @public
 	 */
 	collapseNode: function (ct, callback, scope) {
-		var newStyle = {
-			width: 0,
-			opacity: 0,
-			easing: 'easeOut',
-			height: 45,
-			duration: scope.node.ownerTree.duration || .25
+//		this._setCollapsedWidth(scope.node);
+
+		this._setWidth(Ext.get(scope.node.ui.getEl()), ct, 0);
+
+		if(!scope.node.parentNode.isRoot) {
+			var currentNode = scope.node.parentNode;
+
+			Ext.get(currentNode.ui.ctNode).setWidth(currentNode.childNodes.length * 47);
+			//this._setWidth(currentNode,Ext.get(currentNode.ui.ctNode),currentNode.childNodes.length * 47);
+/*
+			do {
+				this._setCollapsedWidth(currentNode);
+				currentNode = currentNode.parentNode;
+			} while (!currentNode.isRoot);
+			*/
 		};
-
-		//ct.select('*').shift(newStyle);
-		ct.shift(newStyle);
-
-		newStyle.callback = function() {
-			scope.animating = false;
-			Ext.callback(callback);
-		};
-		newStyle.width = 47;
-		newStyle.opacity = 1;
-		newStyle.scope = scope;
-
-		Ext.get(scope.wrap).shift(newStyle);
+//
+//		console.log(scope);
+//
+		Ext.callback(callback);
+		scope.animating = false;
 	},
+
+	/**
+	 * @param {Object} ct
+	 * @param {Function} callback
+	 * @param {Object} scope
+	 * @return {void}
+	 * @public
+	 */
+	expandNode: function (ct, callback, scope) {
+		this._setExpandedWidth(scope.node);
+
+		if(!scope.node.parentNode.isRoot) {
+			var currentNode = scope.node.parentNode;
+
+			do {
+				this._setExpandedWidth(currentNode);
+				currentNode = currentNode.parentNode;
+			} while (!currentNode.isRoot);
+		};
+
+		Ext.callback(callback);
+		scope.animating = false;
+	},
+
+	
 
 	/**
 	 * @param {Object} scope

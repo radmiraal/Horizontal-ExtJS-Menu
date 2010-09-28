@@ -66,6 +66,12 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb, Ext.tree.TreePanel, {
         this.innerCt = this.body.createChild({tag:'div',
                cls:'f3-breadcrumb-root-ct ' +
                (this.useArrows ? 'f3-breadcrumb-arrows' : this.lines ? 'f3-breadcrumb-lines' : 'f3-breadcrumb-no-lines')});
+
+	   this.on('click',function(node, e){
+
+//		   console.log(arguments);
+//		   node.isClickedNode = true;
+	   });
     }
 });
 

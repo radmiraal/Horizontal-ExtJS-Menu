@@ -41,6 +41,50 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 
 	_nodeHeight: 0,
 
+	onClick: function(e) {
+//
+//			if(this.dropping){
+//				e.stopEvent();
+//				return;
+//			}
+//
+//			if(this.fireEvent("beforeclick", this.node, e) !== false){
+//				var a = e.getTarget('a');
+//				if(!this.disabled && this.node.attributes.href && a){
+//					this.fireEvent("click", this.node, e);
+//					return;
+//				}else if(a && e.ctrlKey){
+//					e.stopEvent();
+//				}
+//				e.preventDefault();
+//				if(this.disabled){
+//					return;
+//				}
+//
+//
+//console.log(this.node.attributes.singleClickExpand);
+//	console.log(!this.animating);
+//		console.log(this.node.isExpandable());
+//
+//				if(this.node.attributes.singleClickExpand && !this.animating && this.node.isExpandable()){
+//					this.node.toggle();
+//				}
+//
+//				this.fireEvent("click", this.node, e);
+//			}else{
+//				e.stopEvent();
+//			}
+//
+
+//		console.log(F3.TYPO3.UserInterface.Breadcrumb.NodeUI.superclass.onClick);
+//
+		F3.TYPO3.UserInterface.Breadcrumb.NodeUI.superclass.onClick.call(this, e);
+
+		//console.log(Ext.get(e.target));
+//		console.log(e);
+//		console.log(arguments);
+	},
+
 	/**
 	 * @param {Object} n
 	 * @param {Object} a
@@ -137,7 +181,7 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
     animExpand : function(callback){
         var ct = Ext.get(this.ctNode);
         ct.stopFx();
-		
+
         if(!this.node.isExpandable()){
             this.updateExpandIcon();
             this.ctNode.style.display = "";
