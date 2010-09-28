@@ -36,11 +36,11 @@ F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler = {
 
 
 	_getVisibleChildNodesCount: function (node) {
-		return Ext.get(node.ui.ctNode).select('.f3-breadcrumb-node-icon').elements.length;
+		return Ext.get(node.ui.ctNode).select('.node-expanded').elements.length;
 	},
 
 	_setExpandedWidth: function(node) {
-		var childNodes = this._getVisibleChildNodesCount(node);
+		var childNodes = this._getVisibleChildNodesCount(node)
 		var ct = Ext.get(node.ui.ctNode);
 
 		Ext.get(node.ui.getEl()).setStyle({display:'inline-block'});
@@ -49,30 +49,6 @@ F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler = {
 		this._setWidth(Ext.get(node.ui.getEl()), ct, childNodes * 47);
 	},
 
-	_setCollapsedWidth: function (node) {
-//		var childNodes = node.parentNode.childNodes.length;
-/*
-		var childNodes = this._getVisibleChildNodesCount(node);
-		var ct = Ext.get(node.ui.ctNode);
-
-		var nodeElement =Ext.get(node.ui.getEl());
-		var container = ct;
-
-		var newWidth = childNodes * 47;
-		container.setWidth(newWidth);
-		nodeElement.setWidth(newWidth + 47);
-		*/
-
-//		this._setWidth(Ext.get(node.ui.getEl()), ct, childNodes * 47);
-//		return;
-//	console.log(node.parentNode.childNodes);
-//
-//
-//
-//		var newWidth = node.parentNode.childNodes.length * 47;
-//
-//		this._setWidth(Ext.get(node.ui.getEl()), ct, newWidth);
-	},
 
 	_setWidth: function(nodeElement, container, width) {
 		nodeElement.setWidth(width + 47);
@@ -87,25 +63,28 @@ F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler = {
 	 * @public
 	 */
 	collapseNode: function (ct, callback, scope) {
-//		this._setCollapsedWidth(scope.node);
 
 		this._setWidth(Ext.get(scope.node.ui.getEl()), ct, 0);
+		ct.setStyle({display:'none'});
+		
+		Ext.each(
+			scope.node.childNodes, 
+			function(node) {
+				Ext.get(node.ui.getEl()).removeClass('node-expanded');
+			}
+		);
 
 		if(!scope.node.parentNode.isRoot) {
 			var currentNode = scope.node.parentNode;
 
-			Ext.get(currentNode.ui.ctNode).setWidth(currentNode.childNodes.length * 47);
-			//this._setWidth(currentNode,Ext.get(currentNode.ui.ctNode),currentNode.childNodes.length * 47);
-/*
-			do {
-				this._setCollapsedWidth(currentNode);
+			do {			
+				Ext.get(currentNode.ui.getEl()).setWidth((currentNode.childNodes.length * 47) + 47 );
+				Ext.get(currentNode.ui.ctNode).setWidth(currentNode.childNodes.length * 47);
 				currentNode = currentNode.parentNode;
 			} while (!currentNode.isRoot);
-			*/
+			
 		};
-//
-//		console.log(scope);
-//
+
 		Ext.callback(callback);
 		scope.animating = false;
 	},
@@ -118,6 +97,13 @@ F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler = {
 	 * @public
 	 */
 	expandNode: function (ct, callback, scope) {
+
+		Ext.each(
+			scope.node.childNodes, 
+			function(node) {
+				Ext.get(node.ui.getEl()).addClass('node-expanded');
+			}
+		);
 		this._setExpandedWidth(scope.node);
 
 		if(!scope.node.parentNode.isRoot) {
