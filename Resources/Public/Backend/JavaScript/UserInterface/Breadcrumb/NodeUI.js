@@ -39,7 +39,7 @@ F3.TYPO3.UserInterface.Breadcrumb.NodeUI = function() {
 
 Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 
-	_nodeHeight: 0,
+//	_nodeHeight: 0,
 
 	onClick: function(e) {
 //
@@ -94,7 +94,7 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 	 * @private
 	 */
 	renderElements: function(n, a, targetNode, bulkRender) {
-		this._nodeHeight = Ext.get(Ext.query('.f3-breadcrumb')[0]).getHeight();
+		//this._nodeHeight = Ext.get(Ext.query('.f3-breadcrumb')[0]).getHeight();
 		
 		var href = a.href ? a.href : Ext.isGecko ? "" : "#";
 
@@ -104,20 +104,22 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 				'" class="f3-breadcrumb-node-el f3-breadcrumb-node-leaf x-unselectable ', a.cls,
 				'" unselectable="on">',
 					// Icon
-					'<img src="', a.icon || this.emptyIcon, '" class="f3-breadcrumb-node-icon',
-					(a.icon ? " f3-breadcrumb-node-inline-icon" : ""), (a.iconCls ? " "+a.iconCls : ""),
-					'" unselectable="on" />',
+					'<span class="f3-breadcrumb-node-icon', (a.icon ? " f3-breadcrumb-node-inline-icon" : ""),
+					(a.iconCls ? " "+a.iconCls : ""), '" unselectable="on" style="background-image: ',
+					a.icon || this.emptyIcon, '"></span>',
+					
 					// Link / label
 					'<a hidefocus="on" class="f3-breadcrumb-node-anchor" href="', href, '" tabIndex="1" ',
 					a.hrefTarget ? ' target="' + a.hrefTarget+'"' : "", '><span class="f3-breadcrumb-node-el-label" unselectable="on">',
 					n.text,"</span></a>",
 					// 'spacer'
-					'<img src="', this.emptyIcon, '" class="f3-breadcrumb-ec-icon f3-breadcrumb-elbow" />',
+					'<span class="f3-breadcrumb-elbow"></span>',
 
 				"</span>",
 				'<span class="f3-breadcrumb-node-ct" style="display:none;"></span>',
 			"</span>"
 		].join('');
+		//'<img src="', a.icon || this.emptyIcon, '" />',
 
 		var nel;
 
@@ -145,6 +147,12 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 	 * @private
 	 */
 	onOver : function(e) {
+		
+		
+		Ext.get(this.getEl()).setStyle({width: 'auto'});
+		Ext.get(this.elNode).setStyle({width: 'auto'});
+
+		//Ext.get(this.getEl()).setStyle({width: '200px'});
 		F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler.nodeOnOver(this, e);
     },
 
@@ -154,6 +162,8 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 	 * @private
 	 */
     onOut : function(e) {
+		Ext.get(this.getEl()).setStyle({width: 'auto'});
+		Ext.get(this.elNode).setStyle({width: 'auto'});
 		F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler.nodeOnOut(this, e);
     },
 
@@ -171,7 +181,15 @@ Ext.extend(F3.TYPO3.UserInterface.Breadcrumb.NodeUI, Ext.tree.TreeNodeUI, {
 			this.removeClass("f3-breadcrumb-selected");
 		}
 	},
-	
+
+	updateExpandIcon: function() {
+		var elbowElement = Ext.get(this.node.ui.ecNode);
+		if (this.node.expanded) {
+			elbowElement.addClass('f3-breadcrumb-elbow-expanded');
+		} else {
+			elbowElement.removeClass('f3-breadcrumb-elbow-expanded');
+		}
+	},
 	
 	/**
 	 * @param {Function} callback

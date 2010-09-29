@@ -34,25 +34,34 @@ Ext.namespace('F3.TYPO3.UserInterface.Breadcrumb');
 
 F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler = {
 
+	_collapseSubNodes: function (node, scope) {
+		Ext.each(
+			node.childNodes,
+			function(node) {
 
-	_getVisibleChildNodesCount: function (node) {
-		return Ext.get(node.ui.ctNode).select('.node-expanded').elements.length;
-	},
+				var icon = Ext.get(node.ui.iconNode);
 
-	_setExpandedWidth: function(node) {
-		var childNodes = this._getVisibleChildNodesCount(node)
-		var ct = Ext.get(node.ui.ctNode);
+				icon.setStyle({padding: '0px', margin: '0px', height: 45});
+				
+				icon.shift({
+					width: 0,
+					display: 'none',
+					height: 45,
+					opacity: 0,
+					duration: .25
+				});
 
-		Ext.get(node.ui.getEl()).setStyle({display:'inline-block'});
-		ct.setStyle({display:'inline-block'});
+				Ext.get(node.ui.ecNode).removeClass('f3-breadcrumb-elbow-expanded');
+//				icon.slideOut();
+				
+//				console.log(icon);
 
-		this._setWidth(Ext.get(node.ui.getEl()), ct, childNodes * 47);
-	},
+				if (node.childNodes && node.childNodes.length > 0) {
+					scope._collapseSubNodes(node, scope);
+				}
+			}
+		);
 
-
-	_setWidth: function(nodeElement, container, width) {
-		nodeElement.setWidth(width + 47);
-		container.setWidth(width);
 	},
 
 	/**
@@ -64,27 +73,8 @@ F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler = {
 	 */
 	collapseNode: function (ct, callback, scope) {
 
-		this._setWidth(Ext.get(scope.node.ui.getEl()), ct, 0);
-		ct.setStyle({display:'none'});
-		
-		Ext.each(
-			scope.node.childNodes, 
-			function(node) {
-				Ext.get(node.ui.getEl()).removeClass('node-expanded');
-			}
-		);
-
-		if(!scope.node.parentNode.isRoot) {
-			var currentNode = scope.node.parentNode;
-
-			do {			
-				Ext.get(currentNode.ui.getEl()).setWidth((currentNode.childNodes.length * 47) + 47 );
-				Ext.get(currentNode.ui.ctNode).setWidth(currentNode.childNodes.length * 47);
-				currentNode = currentNode.parentNode;
-			} while (!currentNode.isRoot);
-			
-		};
-
+		this._collapseSubNodes(scope.node, this);
+		Ext.get(scope.node.ui.getEl()).removeClass('f3-breadcrumb-node-expanded');
 		Ext.callback(callback);
 		scope.animating = false;
 	},
@@ -98,22 +88,24 @@ F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler = {
 	 */
 	expandNode: function (ct, callback, scope) {
 
+		Ext.get(scope.node.ui.getEl()).addClass('f3-breadcrumb-node-expanded');
+		Ext.get(scope.node.ui.getEl()).setStyle({width: 'auto'});
+
 		Ext.each(
 			scope.node.childNodes, 
 			function(node) {
-				Ext.get(node.ui.getEl()).addClass('node-expanded');
+				var icon = Ext.get(node.ui.iconNode);
+
+				icon.shift({
+					width: 47,
+					display: 'inline',
+					opacity: 1,
+					duration: .25
+				});
 			}
 		);
-		this._setExpandedWidth(scope.node);
 
-		if(!scope.node.parentNode.isRoot) {
-			var currentNode = scope.node.parentNode;
-
-			do {
-				this._setExpandedWidth(currentNode);
-				currentNode = currentNode.parentNode;
-			} while (!currentNode.isRoot);
-		};
+		ct.setStyle({display:'inline'});
 
 		Ext.callback(callback);
 		scope.animating = false;
@@ -128,6 +120,8 @@ F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler = {
 	 * @public
 	 */
 	nodeOnOver: function (scope, e) {
+		var label = Ext.get(scope.node.ui.textNode);
+		label.setStyle({display:'inline'});
 		
 	},
 
@@ -138,7 +132,8 @@ F3.TYPO3.UserInterface.Breadcrumb.AnimationHandler = {
 	 * @public
 	 */
 	nodeOnOut: function (scope, e) {
-
+		var label = Ext.get(scope.node.ui.textNode);
+		label.setStyle({display:'none'});
 	}
 };
 

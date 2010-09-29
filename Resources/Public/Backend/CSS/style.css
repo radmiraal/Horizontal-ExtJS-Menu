@@ -1,21 +1,25 @@
-* {
-	padding: 0px;
-	margin: 0px;
+.f3-breadcrumb-node-icon {
+	float: left;
 }
-.f3-breadcrumb-node-ct {}
+
+.f3-breadcrumb-node-ct {
+	float: left;
+}
+
 .f3-breadcrumb-node {
+	overflow: hidden;
 }
 
 .f3-breadcrumb-node-ct > * {
 }
 
 .f3-breadcrumb-node-el {
+	float: left;
 }
 
 .f3-breadcrumb-root-node {
 	background-color: #6a6a6a;
 	overflow: hidden;
-	
 }
 
 .f3-breadcrumb-node-anchor {
@@ -27,6 +31,17 @@
 /*	display: inline-block;*/
 }
 
-.x-tree-ec-icon {
-	display: none;
+.f3-breadcrumb-elbow-expanded {
+	background-image: url('../Icons/right_arrow.png');
+	width: 25px;
+	height: 25px;
+	display: inline-block;
+	padding: 15px 7px 0px 0px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+
+.f3-breadcrumb-root-node > .f3-breadcrumb-node-expanded {
+	padding-right: 10px;
 }
